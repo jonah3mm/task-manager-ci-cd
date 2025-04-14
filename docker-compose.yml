@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./backend-test
+    ports:
+      - "5001:5001"
+    restart: always
+
+  frontend:
+    build:
+      context: ./task-manager-frontend
+    ports:
+      - "3001:80"
+    restart: always
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    restart: always
+
+volumes:
+  jenkins_home:
